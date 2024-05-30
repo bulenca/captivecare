@@ -15,6 +15,8 @@ const Manage = () => {
 
 		if (loginInput.value === 'admin' && passInput.value === 'admin') {
 			setIsLogged(true)
+		} else {
+			alert('Wprowadzono nieprawidłowe dane logowania! Spróbuj ponownie...')
 		}
 	}
 
