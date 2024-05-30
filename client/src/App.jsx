@@ -4,6 +4,7 @@ import './App.css'
 import Home from './components/Home'
 import Prisoners from './components/Prisoners'
 import Details from './components/Details'
+import Manage from './components/Manage'
 
 function App() {
 	return (
@@ -29,7 +30,7 @@ function App() {
 					<Route exact path='/' element={<Home />} />
 					<Route path='/prisoners' element={<Prisoners />} />
 					<Route path='/details' element={<Details />} />
-					{/* <Route path='/contact' component={Contact} /> */}
+					<Route path='/manage' element={<Manage />} />
 				</Routes>
 			</BrowserRouter>
 		</>
