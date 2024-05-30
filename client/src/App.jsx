@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
+import Prisoners from './components/Prisoners'
 
 function App() {
 	return (
@@ -13,19 +14,19 @@ function App() {
 							<Link to='/'>Home</Link>
 						</li>
 						<li>
-							<Link to='/about'>Prisoners</Link>
+							<Link to='/prisoners'>Prisoners</Link>
 						</li>
 						<li>
-							<Link to='/products'>Details</Link>
+							<Link to='/details'>Details</Link>
 						</li>
 						<li>
-							<Link to='/contact'>Manage</Link>
+							<Link to='/manage'>Manage</Link>
 						</li>
 					</ul>
 				</nav>
 				<Routes>
 					<Route exact path='/' element={<Home />} />
-					{/* <Route path='/about' component={About} /> */}
+					<Route path='/prisoners' element={<Prisoners />} />
 					{/* <Route path='/products' component={Products} /> */}
 					{/* <Route path='/contact' component={Contact} /> */}
 				</Routes>
