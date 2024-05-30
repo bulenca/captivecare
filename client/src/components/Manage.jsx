@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Login from './Login'
+import ManageLogged from './ManageLogged'
 
 let isLogged = false
 
@@ -35,7 +36,10 @@ const Manage = () => {
 
 	return (
 		<>
-			<div class='prisoners-container'>{!isLogged && <Login onLogin={logIn} />}</div>
+			<div class='prisoners-container'>
+				{!isLogged && <Login onLogin={logIn} />}
+				{isLogged && <ManageLogged />}
+			</div>
 		</>
 	)
 }

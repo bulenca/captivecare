@@ -64,6 +64,7 @@ table {
 	width: 60%;
 	border-collapse: collapse;
 	border: 3px solid rgb(110, 99, 110);
+	overflow: scroll;
 }
 
 th {
@@ -141,7 +142,7 @@ tbody tr:nth-child(even) {
 	padding-left: 8px;
 }
 
-.mainContainer input[type='button'] {
+.mainContainer .inputButton {
 	border: none;
 	background: rgb(80, 80, 80);
 	color: white;
@@ -153,6 +154,29 @@ tbody tr:nth-child(even) {
 	transition: 0.3s background;
 }
 
-.mainContainer input[type='button']:hover {
+.mainContainer .inputButton:hover {
 	background: rgb(56, 52, 52);
+}
+
+td.manage {
+	color: #ff160e;
+	transition: 0.3s color;
+}
+
+td.manage:hover {
+	color: #c71d0a;
+	cursor: pointer;
+}
+
+.popup {
+	display: flex;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	flex-direction: column;
+	align-items: center;
+	background-color: #111;
+	width: 30%;
+	height: 60%;
 }
