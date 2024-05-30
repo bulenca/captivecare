@@ -15,7 +15,7 @@ const Login = ({ onLogin }) => {
 				</div>
 				<br />
 				<div className={'inputContainer'}>
-					<input className={'inputButton'} onClick={onLogin} type='button' value={'Log in'} />
+					<input className={'inputButton'} onClick={onLogin} type='button' value={'Zaloguj'} />
 				</div>
 			</div>
 		</>

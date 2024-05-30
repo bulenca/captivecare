@@ -217,17 +217,20 @@ td.manage:hover {
 }
 
 .home-container .inputButton {
+}
+
+.home-container a {
 	border: none;
-	background: rgb(80, 80, 80);
 	color: white;
 	padding: 12px 24px;
 	margin: 8px;
-	font-size: 14px;
+	font-size: 20	px;
 	border-radius: 8px;
 	cursor: pointer;
+	background: rgb(80, 80, 80);
+	text-decoration: none;
 	transition: 0.3s background;
 }
-
-.home-container .inputButton:hover {
+.home-container a:hover {
 	background: rgb(56, 52, 52);
 }
