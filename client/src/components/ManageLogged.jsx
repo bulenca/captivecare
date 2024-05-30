@@ -7,14 +7,30 @@ const ManageLogged = () => {
 	const [newPrisoner, setNewPrisoner] = useState({
 		name: '',
 		surname: '',
-		age: 0,
-		sentence: 0,
+		age: 18,
+		sentence: 1,
 		reason: '',
 	})
 
-	const [isOpenAdd, setIsOpenAdd] = useState(true)
+	const [editPrisoner, setEditPrisoner] = useState({
+		id: 0,
+		name: '',
+		surname: '',
+		sentence: 1,
+	})
 
-	const togglePopupAdd = () => setIsOpenAdd(!isOpenAdd)
+	const [isOpenAdd, setIsOpenAdd] = useState(false)
+	const [isOpenEdit, setIsOpenEdit] = useState(true)
+
+	const togglePopupAdd = () => {
+		setIsOpenAdd(!isOpenAdd)
+		setIsOpenEdit(false)
+	}
+
+	const togglePopupEdit = () => {
+		setIsOpenEdit(!isOpenEdit)
+		setIsOpenAdd(false)
+	}
 
 	async function getPrisonersList() {
 		try {
@@ -42,6 +58,26 @@ const ManageLogged = () => {
 			}
 			getPrisonersList()
 			setNewPrisoner({ name: '', surname: '', age: 0, sentence: 0, reason: '' })
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	async function updatePrisoner() {
+		if (editPrisoner.sentence <= 0) {
+			deletePrisoner()
+			return
+		}
+
+		setEditPrisoner({ name: '', surname: '', sentence: 1, id: 0 })
+		getPrisonersList()
+	}
+
+	async function deletePrisoner() {
+		try {
+			const response = await axios.delete(`http://localhost:8000/api/prisoners/${editPrisoner.id}`)
+			setEditPrisoner({ name: '', surname: '', sentence: 1, id: 0 })
+			getPrisonersList()
 		} catch (err) {
 			console.log(err)
 		}
@@ -80,7 +116,19 @@ const ManageLogged = () => {
 								<td>{prisoner.age}</td>
 								<td>{prisoner.sentence} lat</td>
 								<td>{prisoner.reason}</td>
-								<td class='manage'>Zarządzaj</td>
+								<td
+									class='manage'
+									onClick={() => {
+										togglePopupEdit()
+										setEditPrisoner({
+											id: prisoner._id,
+											name: prisoner.name,
+											surname: prisoner.surname,
+											sentence: prisoner.sentence,
+										})
+									}}>
+									Zarządzaj
+								</td>
 							</tr>
 						)
 					})}
@@ -95,6 +143,7 @@ const ManageLogged = () => {
 						id='new-prisoner_name'
 						type='text'
 						class='inputBox'
+						placeholder='Wprowadź imie...'
 						style={{ width: '70%', height: '8%' }}
 						value={newPrisoner.name}
 						onChange={e => setNewPrisoner({ ...newPrisoner, name: e.target.value })}
@@ -105,6 +154,7 @@ const ManageLogged = () => {
 						id='new-prisoner_surname'
 						type='text'
 						class='inputBox'
+						placeholder='Wprowadź nazwisko...'
 						style={{ width: '70%', height: '8%' }}
 						value={newPrisoner.surname}
 						onChange={e => setNewPrisoner({ ...newPrisoner, surname: e.target.value })}
@@ -117,6 +167,7 @@ const ManageLogged = () => {
 						max='100'
 						type='number'
 						class='inputBox'
+						placeholder='18'
 						style={{ width: '70%', height: '8%' }}
 						value={newPrisoner.age}
 						onChange={e => setNewPrisoner({ ...newPrisoner, age: e.target.value })}
@@ -128,6 +179,7 @@ const ManageLogged = () => {
 						min='1'
 						type='number'
 						class='inputBox'
+						placeholder='1'
 						style={{ width: '70%', height: '8%' }}
 						value={newPrisoner.sentence}
 						onChange={e => setNewPrisoner({ ...newPrisoner, sentence: e.target.value })}
@@ -138,6 +190,7 @@ const ManageLogged = () => {
 						id='new-prisoner_reason'
 						type='text'
 						class='inputBox'
+						placeholder='Wprowadź powód...'
 						style={{ width: '70%', height: '8%' }}
 						value={newPrisoner.reason}
 						onChange={e => setNewPrisoner({ ...newPrisoner, reason: e.target.value })}
@@ -153,6 +206,40 @@ const ManageLogged = () => {
 							Dodaj
 						</button>
 						<button class='inputButton' onClick={togglePopupAdd}>
+							Zamknij
+						</button>
+					</div>
+				</div>
+			)}
+
+			{isOpenEdit && (
+				<div className='popup popup-add'>
+					<h2>Zarządzaj więźniem</h2>
+					<h3>
+						{editPrisoner.name} {editPrisoner.surname}
+					</h3>
+					<label htmlFor='edit-prisoner_sentence'>Wyrok (ile lat):</label>
+					<input
+						id='edit-prisoner_sentence'
+						min='0'
+						type='number'
+						class='inputBox'
+						placeholder='0'
+						style={{ width: '70%', height: '8%' }}
+						value={editPrisoner.sentence}
+						onChange={e => setEditPrisoner({ ...editPrisoner, sentence: e.target.value })}
+					/>
+
+					<div className='buttons'>
+						<button
+							class='inputButton'
+							onClick={() => {
+								togglePopupEdit()
+								updatePrisoner()
+							}}>
+							Zmień
+						</button>
+						<button class='inputButton' onClick={togglePopupEdit}>
 							Zamknij
 						</button>
 					</div>
