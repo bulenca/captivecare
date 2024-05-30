@@ -36,14 +36,14 @@ const ManageLogged = () => {
 		try {
 			const response = await axios.post('http://localhost:8000/api/prisoners', formData)
 
-			if (!response.ok) {
-				throw new Error(`Network response wasn't ok ${response.status}`)
+			const data = await response.data
+			if (data.message) {
+				alert(data.message)
 			}
-
-			const data = await response.json()
+			getPrisonersList()
 			setNewPrisoner({ name: '', surname: '', age: 0, sentence: 0, reason: '' })
 		} catch (err) {
-			console.error(`Error: ${err.message}`)
+			console.log(err)
 		}
 	}
 
