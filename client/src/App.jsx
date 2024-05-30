@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import Prisoners from './components/Prisoners'
+import Details from './components/Details'
 
 function App() {
 	return (
@@ -27,7 +28,7 @@ function App() {
 				<Routes>
 					<Route exact path='/' element={<Home />} />
 					<Route path='/prisoners' element={<Prisoners />} />
-					{/* <Route path='/products' component={Products} /> */}
+					<Route path='/details' element={<Details />} />
 					{/* <Route path='/contact' component={Contact} /> */}
 				</Routes>
 			</BrowserRouter>

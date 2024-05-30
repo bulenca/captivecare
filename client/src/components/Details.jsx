@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const Prisoners = () => {
+const Details = () => {
 	const [prisonersList, setPrisonersList] = useState([])
 
 	async function getPrisonersList() {
@@ -35,4 +35,4 @@ const Prisoners = () => {
 	)
 }
 
-export default Prisoners
+export default Details

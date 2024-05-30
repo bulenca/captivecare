@@ -8,6 +8,6 @@ const prisonerSchema = new mongoose.Schema({
 	reason: String,
 })
 
-const Prisoner = mongoose.model('Prisoners', prisonerSchema)
+const Prisoner = mongoose.model('prisoners', prisonerSchema)
 
 module.exports = Prisoner
