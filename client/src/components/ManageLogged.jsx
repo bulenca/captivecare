@@ -25,6 +25,28 @@ const ManageLogged = () => {
 		}
 	}
 
+	async function submitHandler() {
+		const formData = new FormData()
+		formData.append('name', newPrisoner.name)
+		formData.append('surname', newPrisoner.surname)
+		formData.append('age', newPrisoner.age)
+		formData.append('sentence', newPrisoner.sentence)
+		formData.append('reason', newPrisoner.reason)
+
+		try {
+			const response = await axios.post('http://localhost:8000/api/prisoners', formData)
+
+			if (!response.ok) {
+				throw new Error(`Network response wasn't ok ${response.status}`)
+			}
+
+			const data = await response.json()
+			setNewPrisoner({ name: '', surname: '', age: 0, sentence: 0, reason: '' })
+		} catch (err) {
+			console.error(`Error: ${err.message}`)
+		}
+	}
+
 	useEffect(() => {
 		getPrisonersList()
 	}, [])
@@ -66,24 +88,74 @@ const ManageLogged = () => {
 			</table>
 
 			{isOpenAdd && (
-				<div className='popup'>
+				<div className='popup popup-add'>
 					<h2>Dodaj więźnia</h2>
 					<label htmlFor='new-prisoner_name'>Imie:</label>
-					<input id='new-prisoner_name' type='text' class='inputBox' style={{ width: '70%', height: '8%' }} />
+					<input
+						id='new-prisoner_name'
+						type='text'
+						class='inputBox'
+						style={{ width: '70%', height: '8%' }}
+						value={newPrisoner.name}
+						onChange={e => setNewPrisoner({ ...newPrisoner, name: e.target.value })}
+					/>
 
 					<label htmlFor='new-prisoner_surname'>Nazwisko:</label>
-					<input id='new-prisoner_surname' type='text' class='inputBox' style={{ width: '70%', height: '8%' }} />
+					<input
+						id='new-prisoner_surname'
+						type='text'
+						class='inputBox'
+						style={{ width: '70%', height: '8%' }}
+						value={newPrisoner.surname}
+						onChange={e => setNewPrisoner({ ...newPrisoner, surname: e.target.value })}
+					/>
 
 					<label htmlFor='new-prisoner_age'>Wiek:</label>
-					<input id='new-prisoner_age' type='text' class='inputBox' style={{ width: '70%', height: '8%' }} />
+					<input
+						id='new-prisoner_age'
+						min='18'
+						max='100'
+						type='number'
+						class='inputBox'
+						style={{ width: '70%', height: '8%' }}
+						value={newPrisoner.age}
+						onChange={e => setNewPrisoner({ ...newPrisoner, age: e.target.value })}
+					/>
 
 					<label htmlFor='new-prisoner_sentence'>Wyrok (ile lat):</label>
-					<input id='new-prisoner_sentence' type='text' class='inputBox' style={{ width: '70%', height: '8%' }} />
+					<input
+						id='new-prisoner_sentence'
+						min='1'
+						type='number'
+						class='inputBox'
+						style={{ width: '70%', height: '8%' }}
+						value={newPrisoner.sentence}
+						onChange={e => setNewPrisoner({ ...newPrisoner, sentence: e.target.value })}
+					/>
 
 					<label htmlFor='new-prisoner_reason'>Powód:</label>
-					<input id='new-prisoner_reason' type='text' class='inputBox' style={{ width: '70%', height: '8%' }} />
+					<input
+						id='new-prisoner_reason'
+						type='text'
+						class='inputBox'
+						style={{ width: '70%', height: '8%' }}
+						value={newPrisoner.reason}
+						onChange={e => setNewPrisoner({ ...newPrisoner, reason: e.target.value })}
+					/>
 
-					<button onClick={togglePopupAdd}>Close</button>
+					<div className='buttons'>
+						<button
+							class='inputButton'
+							onClick={() => {
+								togglePopupAdd()
+								submitHandler()
+							}}>
+							Dodaj
+						</button>
+						<button class='inputButton' onClick={togglePopupAdd}>
+							Zamknij
+						</button>
+					</div>
 				</div>
 			)}
 		</>

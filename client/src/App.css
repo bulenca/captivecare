@@ -178,5 +178,36 @@ td.manage:hover {
 	align-items: center;
 	background-color: #111;
 	width: 30%;
-	height: 60%;
+	height: 65%;
+	border: 3px solid rgb(134, 134, 134);
+	border-radius: 8px;
+}
+
+.popup-add input {
+	margin-top: 4px;
+	margin-bottom: 15px;
+}
+
+.popup-add .inputButton {
+	border: none;
+	background: rgb(80, 80, 80);
+	color: white;
+	padding: 12px 24px;
+	margin: 8px;
+	font-size: 14px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s background;
+}
+.popup-add .inputButton:hover {
+	background: rgb(56, 52, 52);
+}
+
+.blur {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	filter: blur(10px);
 }
