@@ -20,7 +20,7 @@ const ManageLogged = () => {
 	})
 
 	const [isOpenAdd, setIsOpenAdd] = useState(false)
-	const [isOpenEdit, setIsOpenEdit] = useState(true)
+	const [isOpenEdit, setIsOpenEdit] = useState(false)
 
 	const togglePopupAdd = () => {
 		setIsOpenAdd(!isOpenAdd)
@@ -68,6 +68,9 @@ const ManageLogged = () => {
 			deletePrisoner()
 			return
 		}
+		const response = await axios.patch(
+			`http://localhost:8000/api/prisoners/${editPrisoner.id}/${editPrisoner.sentence}`
+		)
 
 		setEditPrisoner({ name: '', surname: '', sentence: 1, id: 0 })
 		getPrisonersList()
@@ -213,7 +216,7 @@ const ManageLogged = () => {
 			)}
 
 			{isOpenEdit && (
-				<div className='popup popup-add'>
+				<div className='popup popup-add' style={{ height: '40%' }}>
 					<h2>Zarządzaj więźniem</h2>
 					<h3>
 						{editPrisoner.name} {editPrisoner.surname}

@@ -35,6 +35,18 @@ router.post('/', upload.fields([]), async (req, res) => {
 	}
 })
 
+router.patch('/:id/:sentence', async (req, res) => {
+	const prisonerId = req.params.id
+	const sentence = req.params.sentence
+	try {
+		const updatedPrisoner = await Prisoner.updateOne({ _id: prisonerId }, { $set: { sentence: sentence } })
+		if (!updatedPrisoner) return res.status(404).json({ message: 'Prisoner not found' })
+		res.json(updatedPrisoner)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+})
+
 router.delete('/:id', async (req, res) => {
 	const prisonerId = req.params.id
 	try {
