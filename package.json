@@ -1,0 +1,17 @@
+{
+	"name": "captivecare",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start:server:dev": "nodemon server/server.js",
+		"start:client:dev": "npm run dev --prefix client",
+		"start": "concurrently \"npm run start:server:dev\" \"npm run start:client:dev \" "
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"concurrently": "^8.2.2"
+	}
+}
