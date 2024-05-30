@@ -20,16 +20,30 @@ const Details = () => {
 	return (
 		<>
 			<div class='prisoners-container'>
-				<h1>Lista więźniów</h1>
-				<ul style={{ listStyle: 'none' }}>
-					{prisonersList.map(prisoner => {
-						return (
-							<li key={prisoner._id}>
-								{prisoner.name} {prisoner.surname}, Wiek: {prisoner.age} lat/a
-							</li>
-						)
-					})}
-				</ul>
+				<table>
+					<thead>
+						<tr>
+							<th scope='col'>Imie</th>
+							<th scope='col'>Nazwisko</th>
+							<th scope='col'>Wiek</th>
+							<th scope='col'>Wyrok</th>
+							<th scope='col'>Powód</th>
+						</tr>
+					</thead>
+					<tbody>
+						{prisonersList.map(prisoner => {
+							return (
+								<tr key={prisoner._id}>
+									<td>{prisoner.name}</td>
+									<td>{prisoner.surname}</td>
+									<td>{prisoner.age}</td>
+									<td>{prisoner.sentence} lat</td>
+									<td>{prisoner.reason}</td>
+								</tr>
+							)
+						})}
+					</tbody>
+				</table>
 			</div>
 		</>
 	)

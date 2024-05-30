@@ -36,6 +36,9 @@ nav a:hover {
 	flex-direction: column;
 	background-color: #222;
 	text-align: center;
+	padding: 50px 0;
+	margin-top: 50px;
+	transition: 0.3s background-color;
 }
 
 .prisoners-container ul {
@@ -43,10 +46,39 @@ nav a:hover {
 	border: 2px solid rgb(163, 154, 154);
 	border-radius: 8px;
 	width: 20%;
+	transition: 0.3s background-color;
 }
 
 .prisoners-container ul li {
 	padding: 10px;
 	border-bottom: 2px solid rgb(163, 154, 154);
+	transition: 0.3s background-color;
 }
 
+.prisoners-container ul li:hover {
+	background-color: #353434;
+}
+
+table {
+	table-layout: fixed;
+	width: 60%;
+	border-collapse: collapse;
+	border: 3px solid rgb(110, 99, 110);
+}
+
+th {
+	font-size: 30px;
+}
+
+th,
+td {
+	padding: 20px;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #3d3b3d;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #6b686b;
+}
